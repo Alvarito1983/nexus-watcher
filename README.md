@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="frontend/public/icon-192.svg" width="120" height="120" alt="NEXUS Watcher logo" />
+<img src="https://raw.githubusercontent.com/Alvarito1983/nexus-watcher/master/frontend/public/icon-192.svg" width="120" height="120" alt="NEXUS Watcher logo" />
 
 # NEXUS Watcher
 
@@ -37,15 +37,15 @@
 
 | Dashboard | Login |
 |-----------|-------|
-| ![Dashboard](docs/screenshots/watcher.png) | ![Login](docs/screenshots/login.png) |
+| ![Dashboard](https://raw.githubusercontent.com/Alvarito1983/nexus-watcher/master/docs/screenshots/watcher.png) | ![Login](https://raw.githubusercontent.com/Alvarito1983/nexus-watcher/master/docs/screenshots/login.png) |
 
 | Images | Settings |
 |--------|----------|
-| ![Images](docs/screenshots/images.png) | ![Settings](docs/screenshots/settings.png) |
+| ![Images](https://raw.githubusercontent.com/Alvarito1983/nexus-watcher/master/docs/screenshots/images.png) | ![Settings](https://raw.githubusercontent.com/Alvarito1983/nexus-watcher/master/docs/screenshots/settings.png) |
 
 | History |
 |---------|
-| ![History](docs/screenshots/history.png) |
+| ![History](https://raw.githubusercontent.com/Alvarito1983/nexus-watcher/master/docs/screenshots/history.png) |
 
 ---
 
