@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="frontend/public/icon-192.svg" width="96" height="96" alt="NEXUS Watcher logo" />
+<img src="frontend/public/icon-192.svg" width="120" height="120" alt="NEXUS Watcher logo" />
 
 # NEXUS Watcher
 
@@ -8,8 +8,9 @@
 
 [![Docker Hub](https://img.shields.io/docker/pulls/afraguas1983/nexus-watcher?style=flat-square&logo=docker&logoColor=white&color=F0A500)](https://hub.docker.com/r/afraguas1983/nexus-watcher)
 [![Docker Image Size](https://img.shields.io/docker/image-size/afraguas1983/nexus-watcher/latest?style=flat-square&logo=docker&logoColor=white&color=F0A500)](https://hub.docker.com/r/afraguas1983/nexus-watcher)
-[![GitHub](https://img.shields.io/github/license/Alvarito1983/nexus-watcher?style=flat-square&color=F0A500)](LICENSE)
-[![Node](https://img.shields.io/badge/node-24--alpine-F0A500?style=flat-square&logo=node.js&logoColor=white)](https://hub.docker.com/_/node)
+[![License MIT](https://img.shields.io/badge/license-MIT-F0A500?style=flat-square)](LICENSE)
+[![Node.js 24](https://img.shields.io/badge/node-24--alpine-F0A500?style=flat-square&logo=node.js&logoColor=white)](https://hub.docker.com/_/node)
+[![React 18](https://img.shields.io/badge/react-18-F0A500?style=flat-square&logo=react&logoColor=white)](https://react.dev)
 
 [Docker Hub](https://hub.docker.com/r/afraguas1983/nexus-watcher) · [NEXUS Ecosystem](https://github.com/Alvarito1983/NEXUS) · [Report Bug](https://github.com/Alvarito1983/nexus-watcher/issues)
 
@@ -17,38 +18,18 @@
 
 ---
 
-## What is NEXUS Watcher?
+## ✨ Features
 
-NEXUS Watcher monitors your Docker images and detects when newer versions are available in the registry — using **SHA256 digest comparison**, not just tag names. This means it catches updates even when the tag stays the same (e.g. `latest`).
-
-It works **standalone** or as part of the **NEXUS Ecosystem**, where it integrates seamlessly with NEXUS, NEXUS Notify and NEXUS OS.
-
-### Key features
-
-- **Digest-based detection** — compares local SHA256 vs registry, catches `latest` updates
-- **Two scan modes** — notify only, or auto-update with container recreation
-- **Rollback support** — saves previous digest before updating, one-click restore
-- **Configurable interval** — 1h, 3h, 6h, 12h or 24h, changeable from the UI without restart
-- **Telegram notifications** — alerts when updates are found or applied
-- **Full EN/ES i18n** — English and Spanish UI
-- **REST API** — all features accessible via authenticated API
-- **NEXUS Ecosystem ready** — registers with NEXUS OS, routes events to NEXUS Notify
-
----
-
-## Part of the NEXUS Ecosystem
-
-```
-NEXUS OS              — Unified dashboard & SSO
-├── NEXUS             — Docker manager          :9090
-├── NEXUS Watcher     — Update detection        :9091  ← you are here
-├── NEXUS Pulse       — Uptime & health         :9092
-├── NEXUS Security    — CVEs & audit            :9093
-├── NEXUS Notify      — Alert router            :9094
-└── NEXUS Proxy       — Docker socket proxy     :2375
-```
-
-Each tool works standalone. Together, they think.
+- 🔍 **Digest-based detection** — compares local SHA256 vs registry, catches `latest` updates that tag comparison misses
+- ⚡ **Two scan modes** — notify only, or auto-update with automatic container recreation
+- ↩️ **Rollback support** — saves previous digest before updating, one-click restore to previous version
+- ⏱️ **Configurable interval** — 1h, 3h, 6h, 12h or 24h, changeable live from the UI without restart
+- 📬 **Telegram notifications** — instant alerts when updates are found or applied
+- 🌍 **Full EN/ES i18n** — English and Spanish UI out of the box
+- 🔐 **Authentication** — JWT login, configurable admin credentials
+- 📊 **Scan history** — full log of every scan with results and errors
+- 🔌 **REST API** — all features accessible via authenticated API endpoints
+- 🧩 **NEXUS Ecosystem ready** — registers with NEXUS OS, routes events to NEXUS Notify
 
 ---
 
@@ -138,11 +119,58 @@ Registry auth is handled automatically for public Docker Hub images. For private
 
 ---
 
-## Screenshots
+## 🗺️ Roadmap
 
-| Dashboard | Settings |
-|-----------|----------|
-| Updates list with digest comparison | Scan interval, auto-update mode, Telegram |
+### v1.0.0 — Core ✅
+- Digest-based update detection (SHA256)
+- Manual and scheduled scans
+- Auto-update mode with container recreation
+- Rollback to previous digest
+- Configurable scan interval (live, no restart)
+- Telegram notifications
+- Scan history
+- Full EN/ES i18n
+- JWT authentication
+- REST API
+
+### v1.1.0 — Improvements _(coming soon)_
+- Docker Hub rate limit handling and retry logic
+- Per-image ignore list (exclude images from scanning)
+- Webhook support (generic outgoing webhooks)
+- Email notifications (SMTP)
+- Discord and Slack notifications via NEXUS Notify
+
+### v2.0.0 — NEXUS Ecosystem 🚀 _(Q4 2026)_
+
+The big one. NEXUS Watcher becomes a first-class citizen of the **NEXUS Ecosystem** — a suite of modular Docker management tools that work standalone but are better together.
+
+> *"Each tool works. Together, they think."*
+
+The ecosystem launches with **NEXUS OS** — a unified dashboard that aggregates all tools, provides single sign-on, centralised config, and a single pane of glass for your entire homelab.
+
+```
+NEXUS OS              — Unified dashboard, SSO, service registry
+├── NEXUS             — Docker manager          :9090  ✅ live
+├── NEXUS Watcher     — Update detection        :9091  ✅ live
+├── NEXUS Pulse       — Uptime & health         :9092  🔜 Q3 2026
+├── NEXUS Security    — CVEs, SSL, 2FA, audit   :9093  🔜 Q3 2026
+├── NEXUS Notify      — Unified alert router    :9094  🔜 Q2 2026
+└── NEXUS Proxy       — Docker socket proxy     :2375  ✅ live
+```
+
+**What changes in v2.0.0:**
+- Automatic registration with NEXUS OS on startup
+- SSO — one login for the whole ecosystem
+- Centralised config propagation from NEXUS OS
+- Events routed through NEXUS Notify (one alert config for all tools)
+- Updates widget embedded directly in NEXUS dashboard
+- Multi-host support via NEXUS Proxy
+
+### v3.0.0 — SaaS & Multi-tenant _(2027)_
+- Cloud-hosted NEXUS OS
+- Multiple organisations and teams
+- Free / Pro / Business plans
+- Managed updates and SLA guarantee
 
 ---
 
@@ -164,23 +192,10 @@ npm run dev      # Vite dev server on :9091 with proxy to :3002
 
 ## Tech stack
 
-- **Backend** — Node.js 24, Express, Dockerode, node-cron
+- **Backend** — Node.js 24, Express, Dockerode, node-cron, Axios
 - **Frontend** — React 18, Vite
 - **Base image** — `node:24-alpine`
-- **Registry auth** — Docker Hub token API, GHCR bearer token
-
----
-
-## NEXUS Ecosystem
-
-| Project | Description |
-|---------|-------------|
-| [NEXUS](https://github.com/Alvarito1983/NEXUS) | Docker container manager |
-| **NEXUS Watcher** | Update detection ← this |
-| NEXUS Pulse | Uptime & health monitoring *(coming Q3 2026)* |
-| NEXUS Security | CVE scanning & audit *(coming Q3 2026)* |
-| NEXUS Notify | Unified alert router *(coming Q2 2026)* |
-| NEXUS OS | Unified ecosystem dashboard *(coming Q4 2026)* |
+- **Auth** — JWT sessions, configurable credentials
 
 ---
 
