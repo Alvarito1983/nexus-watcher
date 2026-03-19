@@ -1,0 +1,14 @@
+{
+  "name": "NEXUS Watcher",
+  "short_name": "Watcher",
+  "description": "Docker image update detection for the NEXUS Ecosystem",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0b00",
+  "theme_color": "#F0A500",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/icon-192.svg", "sizes": "192x192", "type": "image/svg+xml", "purpose": "any maskable" },
+    { "src": "/favicon.svg",  "sizes": "any",     "type": "image/svg+xml" }
+  ]
+}

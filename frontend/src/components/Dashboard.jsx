@@ -128,7 +128,7 @@ export default function Dashboard({ token, user, onLogout }) {
   return (
     <div style={{ minHeight: '100vh', background: s.bg, color: s.text }}>
       {/* Header */}
-      <div style={{ background: s.surface, borderBottom: `1px solid ${s.border}`, padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 56 }}>
+      <div className='watcher-header' style={{ background: s.surface, borderBottom: `1px solid ${s.border}`, padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 56 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <WatcherLogo />
           <span style={{ fontWeight: 600, fontSize: 15 }}>{t('appName')}</span>
@@ -144,7 +144,7 @@ export default function Dashboard({ token, user, onLogout }) {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, padding: '20px 24px 0' }}>
+      <div className='watcher-stats' style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, padding: '20px 24px 0' }}>
         {[
           { label: t('totalImages'), value: status?.totalImages ?? '—' },
           { label: t('pendingUpdates'), value: status?.pendingUpdates ?? '—', highlight: status?.pendingUpdates > 0 },
@@ -158,7 +158,7 @@ export default function Dashboard({ token, user, onLogout }) {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: 0, padding: '20px 24px 0', borderBottom: `1px solid ${s.border}`, marginTop: 20 }}>
+      <div className='watcher-tabs' style={{ display: 'flex', gap: 0, padding: '20px 24px 0', borderBottom: `1px solid ${s.border}`, marginTop: 20 }}>
         {['updates', 'images', 'scanHistory', 'settings'].map(tab_ => (
           <button key={tab_} onClick={() => setTab(tab_)} style={{ background: 'none', border: 'none', borderBottom: `2px solid ${tab === tab_ ? s.accent : 'transparent'}`, color: tab === tab_ ? s.text : s.muted, padding: '8px 16px', cursor: 'pointer', fontSize: 13, fontWeight: tab === tab_ ? 600 : 400 }}>
             {t(tab_)} {tab_ === 'updates' && updates.length > 0 && <span style={{ background: s.accent, color: '#000', borderRadius: 10, padding: '1px 6px', fontSize: 10, marginLeft: 4 }}>{updates.length}</span>}
@@ -173,7 +173,7 @@ export default function Dashboard({ token, user, onLogout }) {
       </div>
 
       {/* Content */}
-      <div style={{ padding: '16px 24px' }}>
+      <div className='watcher-content' style={{ padding: '16px 24px' }}>
         {tab === 'updates' && (
           updates.length === 0
             ? <div style={{ color: s.muted, textAlign: 'center', padding: 40 }}>{t('noUpdates')}</div>

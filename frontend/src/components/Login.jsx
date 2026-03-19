@@ -61,10 +61,10 @@ export default function Login({ onLogin }) {
         <LangSelector />
       </div>
 
-      <div style={{ display: 'flex', width: '100%', maxWidth: 900, minHeight: 480, borderRadius: 16, overflow: 'hidden', border: `1px solid ${s.border}` }}>
+      <div className='login-card' style={{ display: 'flex', width: '100%', maxWidth: 900, minHeight: 480, borderRadius: 16, overflow: 'hidden', border: `1px solid ${s.border}` }}>
 
         {/* Left panel */}
-        <div style={{ flex: 1, background: '#0f1117', padding: '48px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div className='login-left' style={{ flex: 1, background: '#0f1117', padding: '48px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           <div>
             <WatcherLogo />
             <h1 style={{ marginTop: 24, fontSize: 32, fontWeight: 700, color: s.text, lineHeight: 1.2 }}>
@@ -85,7 +85,7 @@ export default function Login({ onLogin }) {
         </div>
 
         {/* Right panel — login form */}
-        <div style={{ width: 380, background: s.surface, padding: '48px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div className='login-right' style={{ width: 380, background: s.surface, padding: '48px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <h2 style={{ fontSize: 22, fontWeight: 600, color: s.text, marginBottom: 6 }}>{t('welcomeBack')}</h2>
           <p style={{ fontSize: 13, color: s.muted, marginBottom: 32 }}>{t('signInDesc')}</p>
 
@@ -127,7 +127,7 @@ export default function Login({ onLogin }) {
           </form>
 
           <p style={{ marginTop: 24, fontSize: 11, color: s.muted, textAlign: 'center' }}>
-            NEXUS Watcher v1.0.0 . AlVaRiTo1983
+            NEXUS Watcher v1.0.0
           </p>
         </div>
       </div>
