@@ -6,9 +6,9 @@
 
 **Docker image update detection for the NEXUS Ecosystem**
 
+[![License MIT](https://img.shields.io/badge/license-MIT-F0A500?style=flat-square)](LICENSE)
 [![Docker Hub](https://img.shields.io/docker/pulls/afraguas1983/nexus-watcher?style=flat-square&logo=docker&logoColor=white&color=F0A500)](https://hub.docker.com/r/afraguas1983/nexus-watcher)
 [![Docker Image Size](https://img.shields.io/docker/image-size/afraguas1983/nexus-watcher/latest?style=flat-square&logo=docker&logoColor=white&color=F0A500)](https://hub.docker.com/r/afraguas1983/nexus-watcher)
-[![License MIT](https://img.shields.io/badge/license-MIT-F0A500?style=flat-square)](LICENSE)
 [![Node.js 24](https://img.shields.io/badge/node-24--alpine-F0A500?style=flat-square&logo=node.js&logoColor=white)](https://hub.docker.com/_/node)
 [![React 18](https://img.shields.io/badge/react-18-F0A500?style=flat-square&logo=react&logoColor=white)](https://react.dev)
 
@@ -30,6 +30,22 @@
 - 📊 **Scan history** — full log of every scan with results and errors
 - 🔌 **REST API** — all features accessible via authenticated API endpoints
 - 🧩 **NEXUS Ecosystem ready** — registers with NEXUS OS, routes events to NEXUS Notify
+
+---
+
+## 📸 Screenshots
+
+| Dashboard | Login |
+|-----------|-------|
+| ![Dashboard](docs/screenshots/watcher.png) | ![Login](docs/screenshots/login.png) |
+
+| Images | Settings |
+|--------|----------|
+| ![Images](docs/screenshots/images.png) | ![Settings](docs/screenshots/settings.png) |
+
+| History |
+|---------|
+| ![History](docs/screenshots/history.png) |
 
 ---
 
@@ -115,8 +131,6 @@ All endpoints require `Authorization: Bearer <token>` header (except `/health` a
 7. Repeat every SCAN_INTERVAL seconds
 ```
 
-Registry auth is handled automatically for public Docker Hub images. For private images or GHCR, set `GHCR_TOKEN`.
-
 ---
 
 ## 🗺️ Roadmap
@@ -134,19 +148,16 @@ Registry auth is handled automatically for public Docker Hub images. For private
 - REST API
 
 ### v1.1.0 — Improvements _(coming soon)_
-- Docker Hub rate limit handling and retry logic
-- Per-image ignore list (exclude images from scanning)
-- Webhook support (generic outgoing webhooks)
-- Email notifications (SMTP)
-- Discord and Slack notifications via NEXUS Notify
+- Per-image ignore list
+- Webhook support
+- Email, Discord and Slack notifications via NEXUS Notify
+- Docker Hub rate limit handling
 
 ### v2.0.0 — NEXUS Ecosystem 🚀 _(Q4 2026)_
 
-The big one. NEXUS Watcher becomes a first-class citizen of the **NEXUS Ecosystem** — a suite of modular Docker management tools that work standalone but are better together.
+NEXUS Watcher becomes a first-class citizen of the **NEXUS Ecosystem** — a suite of modular Docker management tools that work standalone but are better together.
 
 > *"Each tool works. Together, they think."*
-
-The ecosystem launches with **NEXUS OS** — a unified dashboard that aggregates all tools, provides single sign-on, centralised config, and a single pane of glass for your entire homelab.
 
 ```
 NEXUS OS              — Unified dashboard, SSO, service registry
@@ -161,32 +172,15 @@ NEXUS OS              — Unified dashboard, SSO, service registry
 **What changes in v2.0.0:**
 - Automatic registration with NEXUS OS on startup
 - SSO — one login for the whole ecosystem
-- Centralised config propagation from NEXUS OS
-- Events routed through NEXUS Notify (one alert config for all tools)
-- Updates widget embedded directly in NEXUS dashboard
+- Centralised config from NEXUS OS
+- Events routed through NEXUS Notify
+- Updates widget embedded in NEXUS dashboard
 - Multi-host support via NEXUS Proxy
 
 ### v3.0.0 — SaaS & Multi-tenant _(2027)_
 - Cloud-hosted NEXUS OS
 - Multiple organisations and teams
 - Free / Pro / Business plans
-- Managed updates and SLA guarantee
-
----
-
-## Development
-
-```bash
-# Backend
-cd backend
-npm install
-npm run dev      # node --watch server.js on :3002
-
-# Frontend (separate terminal)
-cd frontend
-npm install
-npm run dev      # Vite dev server on :9091 with proxy to :3002
-```
 
 ---
 
@@ -196,6 +190,12 @@ npm run dev      # Vite dev server on :9091 with proxy to :3002
 - **Frontend** — React 18, Vite
 - **Base image** — `node:24-alpine`
 - **Auth** — JWT sessions, configurable credentials
+
+---
+
+## License
+
+MIT © [Alvarito1983](https://github.com/Alvarito1983)
 
 ---
 
