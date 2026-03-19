@@ -1,0 +1,39 @@
+name: nexus-watcher
+
+services:
+  nexus-proxy:
+    image: tecnativa/docker-socket-proxy:latest
+    container_name: nexus-watcher-proxy
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      CONTAINERS: 1
+      IMAGES: 1
+      NETWORKS: 1
+      VOLUMES: 1
+      INFO: 1
+      POST: 0
+      BUILD: 0
+      EXEC: 0
+
+  nexus-watcher:
+    build: .
+    container_name: nexus-watcher
+    restart: unless-stopped
+    depends_on:
+      - nexus-proxy
+    volumes:
+      - watcher-data:/app/data
+    environment:
+      DOCKER_HOST: tcp://nexus-proxy:2375
+      PORT: 3002
+      NEXUS_API_KEY: ${NEXUS_API_KEY:-}
+      NEXUS_URL: ${NEXUS_URL:-}
+      NOTIFY_URL: ${NOTIFY_URL:-}
+      SCAN_INTERVAL: ${SCAN_INTERVAL:-3600}
+    ports:
+      - "9091:3002"
+
+volumes:
+  watcher-data:

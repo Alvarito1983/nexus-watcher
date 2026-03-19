@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <!-- Background — dark warm tone -->
+  <rect width="192" height="192" rx="40" fill="#1a1500"/>
+  <!-- Top-left block — full opacity amber -->
+  <rect x="18" y="18" width="72" height="72" rx="14" fill="#F0A500"/>
+  <!-- Top-right block — mid opacity -->
+  <rect x="102" y="18" width="72" height="72" rx="14" fill="#F0A500" opacity="0.55"/>
+  <!-- Bottom-left block — low opacity -->
+  <rect x="18" y="102" width="72" height="72" rx="14" fill="#F0A500" opacity="0.3"/>
+  <!-- Bottom-right block — outlined, contains W -->
+  <rect x="102" y="102" width="72" height="72" rx="14" fill="none" stroke="#F0A500" stroke-width="5"/>
+  <!-- W letter — same style as N in NEXUS -->
+  <path d="M112 118 L122 118 L130 145 L138 128 L146 145 L154 118 L164 118 L152 156 L142 156 L138 142 L134 156 L124 156 Z" fill="#F0A500"/>
+  <!-- Connector lines -->
+  <line x1="90" y1="54" x2="102" y2="54" stroke="#F0A500" stroke-width="5" opacity="0.45" stroke-linecap="round"/>
+  <line x1="54" y1="90" x2="54" y2="102" stroke="#F0A500" stroke-width="5" opacity="0.45" stroke-linecap="round"/>
+  <line x1="90" y1="138" x2="102" y2="138" stroke="#F0A500" stroke-width="5" opacity="0.45" stroke-linecap="round"/>
+  <line x1="138" y1="90" x2="138" y2="102" stroke="#F0A500" stroke-width="5" opacity="0.45" stroke-linecap="round"/>
+</svg>
