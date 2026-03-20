@@ -11,9 +11,8 @@
 [![Docker Image Size](https://img.shields.io/docker/image-size/afraguas1983/nexus-watcher/latest?style=flat-square&logo=docker&logoColor=white&color=F0A500)](https://hub.docker.com/r/afraguas1983/nexus-watcher)
 [![Node.js 24](https://img.shields.io/badge/node-24--alpine-F0A500?style=flat-square&logo=node.js&logoColor=white)](https://hub.docker.com/_/node)
 [![React 18](https://img.shields.io/badge/react-18-F0A500?style=flat-square&logo=react&logoColor=white)](https://react.dev)
-[![Website](https://img.shields.io/badge/website-nexus--watcher-F0A500?style=flat-square&logo=github&logoColor=white)](https://alvarito1983.github.io/nexus-watcher-web)
 
-[alvarito1983.github.io/nexus-watcher-web](https://alvarito1983.github.io/nexus-watcher-web) · [Docker Hub](https://hub.docker.com/r/afraguas1983/nexus-watcher) · [NEXUS Ecosystem](https://github.com/Alvarito1983/NEXUS) · [Report Bug](https://github.com/Alvarito1983/nexus-watcher/issues)
+[Docker Hub](https://hub.docker.com/r/afraguas1983/nexus-watcher) · [NEXUS Ecosystem](https://github.com/Alvarito1983/NEXUS) · [Report Bug](https://github.com/Alvarito1983/nexus-watcher/issues)
 
 </div>
 
