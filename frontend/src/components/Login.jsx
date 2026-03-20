@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { t, useLang, LangSelector } from './i18n.jsx';
 
 const WatcherLogo = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="48" height="48">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="52" height="52" style={{borderRadius:10}}>
     <rect width="192" height="192" rx="40" fill="#1a1500"/>
     <rect x="18" y="18" width="72" height="72" rx="14" fill="#F0A500"/>
     <rect x="102" y="18" width="72" height="72" rx="14" fill="#F0A500" opacity="0.55"/>
@@ -64,23 +64,24 @@ export default function Login({ onLogin }) {
       <div className='login-card' style={{ display: 'flex', width: '100%', maxWidth: 900, minHeight: 480, borderRadius: 16, overflow: 'hidden', border: `1px solid ${s.border}` }}>
 
         {/* Left panel */}
-        <div className='login-left' style={{ flex: 1, background: '#0f1117', padding: '48px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div className='login-left' style={{ flex: 1, background: '#0f1117', padding: '48px 40px', display: 'flex', flexDirection: 'column' }}>
+          <WatcherLogo />
+          <h1 style={{ marginTop: 24, fontSize: 30, fontWeight: 700, color: s.text, lineHeight: 1.2 }}>
+            {t('appSubtitle')}
+          </h1>
+          <p style={{ marginTop: 12, color: s.muted, fontSize: 14, lineHeight: 1.7 }}>
+            {t('monitor')}
+          </p>
+          <div style={{ flex: 1 }} />
           <div>
-            <WatcherLogo />
-            <h1 style={{ marginTop: 24, fontSize: 32, fontWeight: 700, color: s.text, lineHeight: 1.2 }}>
-              {t('appSubtitle')}
-            </h1>
-            <p style={{ marginTop: 16, color: s.muted, fontSize: 14, lineHeight: 1.7 }}>
-              {t('monitor')}
-            </p>
-          </div>
-          <div style={{ display: 'flex', gap: 24 }}>
-            {[t('digestBased'), t('rollbackFeature'), t('autoScan')].map(f => (
-              <div key={f}>
-                <div style={{ fontSize: 13, fontWeight: 600, color: s.accent }}>{f}</div>
-                <div style={{ fontSize: 11, color: s.muted }}>SHA256</div>
-              </div>
-            ))}
+            <div style={{ display: 'flex', gap: 24 }}>
+              {[t('digestBased'), t('rollbackFeature'), t('autoScan')].map(f => (
+                <div key={f}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: s.accent }}>{f}</div>
+                  <div style={{ fontSize: 11, color: s.muted }}>SHA256</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

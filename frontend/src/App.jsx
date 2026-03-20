@@ -1,16 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Dashboard from './components/Dashboard.jsx';
 import Login from './components/Login.jsx';
 
 export default function App() {
   const [token, setToken] = useState(() => localStorage.getItem('watcher-token'));
   const [user, setUser] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('watcher-user')); } catch { return null; }
+    try {
+      const u = JSON.parse(localStorage.getItem('watcher-user'));
+      // Return just the username string
+      return u?.username || u || null;
+    } catch { return null; }
   });
 
-  function handleLogin(token, user) {
+  function handleLogin(token, userObj) {
     setToken(token);
-    setUser(user);
+    setUser(userObj?.username || userObj);
   }
 
   function handleLogout() {
