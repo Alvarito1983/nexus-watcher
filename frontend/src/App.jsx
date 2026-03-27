@@ -7,14 +7,16 @@ export default function App() {
   const [user, setUser] = useState(() => {
     try {
       const u = JSON.parse(localStorage.getItem('watcher-user'));
-      // Return just the username string
-      return u?.username || u || null;
+      if (!u) return null;
+      return typeof u === 'string' ? { username: u, role: 'admin' } : u;
     } catch { return null; }
   });
 
   function handleLogin(token, userObj) {
     setToken(token);
-    setUser(userObj?.username || userObj);
+    const u = typeof userObj === 'string' ? { username: userObj, role: 'admin' } : userObj;
+    setUser(u);
+    localStorage.setItem('watcher-user', JSON.stringify(u));
   }
 
   function handleLogout() {

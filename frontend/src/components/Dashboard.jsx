@@ -158,9 +158,9 @@ export default function Dashboard({ token, user, onLogout }) {
         {/* User */}
         <div style={{ borderTop: `1px solid ${c.border}`, padding: '12px 16px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ width: '32px', height: '32px', background: ACCENT + '20', border: `1px solid ${ACCENT}40`, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85em', fontWeight: 700, color: ACCENT, flexShrink: 0 }}>{user?.[0]?.toUpperCase()}</div>
+            <div style={{ width: '32px', height: '32px', background: ACCENT + '20', border: `1px solid ${ACCENT}40`, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85em', fontWeight: 700, color: ACCENT, flexShrink: 0 }}>{(user?.username || user)?.[0]?.toUpperCase()}</div>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: '0.85em', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user}</div>
+              <div style={{ fontSize: '0.85em', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user?.username || user}</div>
               <div style={{ fontSize: '0.7em', color: ACCENT }}>Administrator</div>
             </div>
             <button onClick={onLogout} title="Logout" style={{ background: 'transparent', border: 'none', color: c.muted, cursor: 'pointer', fontSize: '1.1em', padding: '4px', flexShrink: 0 }}>⎋</button>
@@ -226,7 +226,7 @@ export default function Dashboard({ token, user, onLogout }) {
                 </div>
               ))
           )}
-          {tab === 'settings' && <SettingsView onToast={showToast} />}
+          {tab === 'settings' && <SettingsView onToast={showToast} user={user} />}
         </div>
       </div>
 

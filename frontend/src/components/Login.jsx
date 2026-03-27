@@ -128,7 +128,7 @@ export default function Login({ onLogin }) {
           </form>
 
           <p style={{ marginTop: 24, fontSize: 11, color: s.muted, textAlign: 'center' }}>
-            NEXUS Watcher v1.1.0
+            NEXUS Watcher v1.2.0
           </p>
         </div>
       </div>

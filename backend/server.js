@@ -8,6 +8,7 @@ const updatesRouter = require('./src/routes/updates');
 const scanRouter = require('./src/routes/scan');
 const { router: authRouter, sessions } = require('./src/routes/auth');
 const { router: settingsRouter, load: loadSettings } = require('./src/routes/settings');
+const usersRouter = require('./src/routes/users');
 const { startScheduler } = require('./src/services/scheduler');
 const { runScan } = require('./src/services/scanner');
 
@@ -32,7 +33,8 @@ app.use('/api', (req, res, next) => {
   if (!token) return res.status(401).json({ ok: false, error: 'Unauthorized' });
   const apiKey = process.env.NEXUS_API_KEY;
   if (apiKey && token === apiKey) return next();
-  if (sessions.has(token)) return next();
+  const session = sessions.get(token);
+  if (session) { req.user = session; return next(); }
   return res.status(401).json({ ok: false, error: 'Unauthorized' });
 });
 
@@ -40,6 +42,7 @@ app.use('/api/images', imagesRouter);
 app.use('/api/updates', updatesRouter);
 app.use('/api/scan', scanRouter);
 app.use('/api/settings', settingsRouter);
+app.use('/api/users', usersRouter);
 
 // SPA fallback
 app.get('*', (req, res) => {
