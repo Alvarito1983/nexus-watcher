@@ -13,12 +13,14 @@ services:
       NETWORKS: 1
       VOLUMES: 1
       INFO: 1
-      POST: 0
-      BUILD: 0
-      EXEC: 0
+      POST: 1
+      DELETE: 1
+      ALLOW_START: 1
+      ALLOW_STOP: 1
+      ALLOW_RESTARTS: 1
 
   nexus-watcher:
-    build: .
+    image: afraguas1983/nexus-watcher:latest
     container_name: nexus-watcher
     restart: unless-stopped
     depends_on:
@@ -28,9 +30,8 @@ services:
     environment:
       DOCKER_HOST: tcp://nexus-proxy:2375
       PORT: 3002
-      NEXUS_API_KEY: ${NEXUS_API_KEY:-}
-      NEXUS_URL: ${NEXUS_URL:-}
-      NOTIFY_URL: ${NOTIFY_URL:-}
+      ADMIN_USER: ${ADMIN_USER:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin}
       SCAN_INTERVAL: ${SCAN_INTERVAL:-3600}
     ports:
       - "9091:3002"

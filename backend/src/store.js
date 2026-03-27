@@ -39,7 +39,17 @@ module.exports = {
   getImages: () => Object.values(state.images),
   getImage: (id) => state.images[id],
   setImage: (id, data) => { state.images[id] = { ...state.images[id], ...data }; save(); },
-  getUpdates: () => Object.values(state.images).filter(i => i.hasUpdate),
+  getUpdates: () => {
+    const withUpdate = Object.values(state.images).filter(i => i.hasUpdate);
+    // Deduplicate by repoTag — keep only the most recent entry per image
+    const seen = new Map();
+    for (const img of withUpdate) {
+      const key = img.repoTag || `${img.name}:${img.tag}`;
+      const existing = seen.get(key);
+      if (!existing || img.lastChecked > existing.lastChecked) seen.set(key, img);
+    }
+    return Array.from(seen.values());
+  },
   getScanHistory: () => state.scanHistory,
   getLastScan: () => state.lastScan,
   addScanResult: (result) => {
