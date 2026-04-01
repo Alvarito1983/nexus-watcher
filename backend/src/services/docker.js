@@ -48,14 +48,17 @@ async function getContainersUsingImage(imageId) {
     }));
 }
 
-async function pullImage(repoTag) {
+// onProgress(event) is called for each pull event (layer progress)
+// event shape: { status, progressDetail: { current, total }, id }
+async function pullImage(repoTag, onProgress) {
   return new Promise((resolve, reject) => {
     docker.pull(repoTag, (err, stream) => {
       if (err) return reject(err);
-      docker.modem.followProgress(stream, (err, output) => {
-        if (err) return reject(err);
-        resolve(output);
-      });
+      docker.modem.followProgress(
+        stream,
+        (err, output) => { if (err) reject(err); else resolve(output); },
+        onProgress || null
+      );
     });
   });
 }

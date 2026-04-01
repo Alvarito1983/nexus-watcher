@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const store = require('../store');
 const { pullImage, recreateContainer } = require('../services/docker');
+const { getIo } = require('../io');
+
+function emit(id, stage, extra = {}) {
+  const io = getIo();
+  if (io) io.emit('update:progress', { id, stage, ...extra });
+}
 
 // GET /api/updates — images with updates available
 router.get('/', (req, res) => {
@@ -17,9 +23,24 @@ router.post('/:id/apply', async (req, res) => {
 
     // Save current digest for rollback
     store.setImage(img.id, { rollbackDigest: img.localDigest });
+    emit(img.id, 'pulling', { percent: 0, layer: '', status: 'Starting pull...' });
 
-    // Pull new image
-    await pullImage(img.repoTag);
+    // Pull new image with per-layer progress
+    const layerProgress = {};
+    await pullImage(img.repoTag, (event) => {
+      if (!event.id) return;
+      const current = event.progressDetail?.current || 0;
+      const total   = event.progressDetail?.total   || 0;
+      if (total > 0) layerProgress[event.id] = { current, total };
+
+      const totalBytes = Object.values(layerProgress).reduce((s, l) => s + l.total, 0);
+      const doneBytes  = Object.values(layerProgress).reduce((s, l) => s + l.current, 0);
+      const percent = totalBytes > 0 ? Math.round((doneBytes / totalBytes) * 100) : 0;
+
+      emit(img.id, 'pulling', { percent, layer: event.id, status: event.status || '' });
+    });
+
+    emit(img.id, 'recreating');
 
     // Recreate each container using this image
     const results = [];
@@ -33,10 +54,12 @@ router.post('/:id/apply', async (req, res) => {
     }
 
     store.setImage(img.id, { hasUpdate: false, updateApplied: true, lastUpdated: new Date().toISOString() });
+    emit(img.id, 'done');
 
     res.json({ ok: true, data: { image: img.repoTag, containers: results } });
   } catch (e) {
     console.error(`[updates] Apply failed for ${img.repoTag}:`, e.message);
+    emit(img.id, 'error', { message: e.message });
     res.status(500).json({ ok: false, error: e.message });
   }
 });
@@ -56,13 +79,27 @@ router.post('/apply-all', async (req, res) => {
   const results = [];
   for (const img of updates) {
     try {
-      await pullImage(img.repoTag);
+      emit(img.id, 'pulling', { percent: 0, layer: '', status: 'Starting pull...' });
+      const layerProgress = {};
+      await pullImage(img.repoTag, (event) => {
+        if (!event.id) return;
+        const current = event.progressDetail?.current || 0;
+        const total   = event.progressDetail?.total   || 0;
+        if (total > 0) layerProgress[event.id] = { current, total };
+        const totalBytes = Object.values(layerProgress).reduce((s, l) => s + l.total, 0);
+        const doneBytes  = Object.values(layerProgress).reduce((s, l) => s + l.current, 0);
+        const percent = totalBytes > 0 ? Math.round((doneBytes / totalBytes) * 100) : 0;
+        emit(img.id, 'pulling', { percent, layer: event.id, status: event.status || '' });
+      });
+      emit(img.id, 'recreating');
       for (const container of img.containers || []) {
         await recreateContainer(container.id);
       }
       store.setImage(img.id, { hasUpdate: false, updateApplied: true, lastUpdated: new Date().toISOString() });
+      emit(img.id, 'done');
       results.push({ image: img.repoTag, status: 'updated' });
     } catch (e) {
+      emit(img.id, 'error', { message: e.message });
       results.push({ image: img.repoTag, status: 'error', error: e.message });
     }
   }
@@ -78,7 +115,6 @@ router.post('/:id/rollback', async (req, res) => {
 
   try {
     console.log(`[updates] Rolling back ${img.repoTag}...`);
-    // Pull by digest
     await pullImage(`${img.name}@${img.rollbackDigest}`);
     store.setImage(img.id, { hasUpdate: false, updateApplied: false, rolledBack: true });
     res.json({ ok: true, data: { image: img.repoTag, rolledBackTo: img.rollbackDigest } });

@@ -1,7 +1,10 @@
+const http = require('http');
 const express = require('express');
 const cors = require('cors');
+const { Server } = require('socket.io');
 const path = require('path');
 
+const ioModule = require('./src/io');
 const healthRouter = require('./src/routes/health');
 const imagesRouter = require('./src/routes/images');
 const updatesRouter = require('./src/routes/updates');
@@ -13,6 +16,10 @@ const { startScheduler } = require('./src/services/scheduler');
 const { runScan } = require('./src/services/scanner');
 
 const app = express();
+const httpServer = http.createServer(app);
+const io = new Server(httpServer, { cors: { origin: '*' } });
+ioModule.setIo(io);
+
 const PORT = process.env.PORT || 3002;
 
 app.use(cors());
@@ -53,7 +60,7 @@ app.get('*', (req, res) => {
 const settings = loadSettings();
 startScheduler(settings.scanInterval);
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`NEXUS Watcher backend on port ${PORT}`);
   console.log(`Admin user: ${process.env.ADMIN_USER || 'admin'}`);
   console.log(`Scan interval: every ${settings.scanInterval}s | Mode: ${settings.scanMode}`);
