@@ -147,7 +147,23 @@ All endpoints require `Authorization: Bearer <token>` header (except `/health` a
 - JWT authentication
 - REST API
 
-### v1.1.0 — Improvements _(coming soon)_
+### v1.1.0 — User management ✅
+- Session-based auth with Admin / Viewer roles
+- User management UI (create, delete, reset password)
+
+### v1.3.0 — Dark Premium UI + Real-time ✅
+- ✅ Dark Premium UI redesign (amber `#F0A500` accent, CSS design system)
+- ✅ Image deduplication — only latest entry shown per image name
+- ✅ Real-time update progress with Socket.io (per-layer pull + recreate stages)
+- ✅ Affected containers info per image (chips in image row)
+- ✅ New version digest display (short SHA on images with updates)
+- ✅ Last checked timestamp per image
+- ✅ Updated badge with apply date
+- ✅ Inter + JetBrains Mono typography
+- ✅ Skeleton loading + empty states
+- ✅ Version injected from `package.json` via `__APP_VERSION__`
+
+### v1.x — Next improvements _(coming soon)_
 - Per-image ignore list
 - Webhook support
 - Email, Discord and Slack notifications via NEXUS Notify
@@ -186,10 +202,10 @@ NEXUS OS              — Unified dashboard, SSO, service registry
 
 ## Tech stack
 
-- **Backend** — Node.js 24, Express, Dockerode, node-cron, Axios
-- **Frontend** — React 18, Vite
+- **Backend** — Node.js 24, Express, Dockerode, Socket.io, node-cron, Axios
+- **Frontend** — React 18, Vite, Lucide React, Socket.io-client
 - **Base image** — `node:24-alpine`
-- **Auth** — JWT sessions, configurable credentials
+- **Auth** — JWT sessions, Admin / Viewer roles
 
 ---
 

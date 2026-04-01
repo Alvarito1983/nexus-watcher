@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.3.0] — 2026-04-01
+
+### Changed
+- Complete UI redesign — Dark Premium visual system (amber accent `#F0A500`)
+- Unified layout with NEXUS ecosystem standard
+- Login: centered card with amber radial glow, fadeSlideUp animation
+- Sidebar: dark surface, Lucide icons, amber active state
+- TopBar: 56px, backdrop-filter blur
+- Stat cards with semantic colors and skeleton loading
+- Typography: Inter + JetBrains Mono
+- Shared components: Button, Badge, Card, Input, EmptyState, Skeleton
+- Version dynamic from `package.json` via `__APP_VERSION__`
+
+### Fixed
+- Image deduplication: only latest version shown per image name
+- Responsive layout: hamburger sidebar on mobile
+
+### Added
+- Real-time update progress bar via Socket.io (pull layers + recreate)
+- Affected containers chips per image row
+- New version digest display (short SHA) on updates
+- Last checked timestamp per image
+- Updated badge with date when update was applied
+
+---
+
 ## [1.2.0] — 2026-04-01
 
 ### Added
